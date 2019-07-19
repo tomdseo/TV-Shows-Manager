@@ -43,13 +43,11 @@ def read_one_show(request, id):
 
 # update button
 def update_show(request, id):
-    print(request.POST['show_network'])
-    errors = Show.objects.basic_validator(request)
-
+    errors = Show.objects.basic_validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect("/shows/" + str(id) + "/update")
+        return redirect("/shows/" + str(id) + "/edit")
     else:
         show_id = int(id)
         show = Show.objects.get(id=show_id)
@@ -58,7 +56,7 @@ def update_show(request, id):
         show.releaseDate = request.POST["show_date"]
         show.description = request.POST["show_description"]
         show.save()
-        return redirect("/shows/" + str(id))
+        return redirect("/shows/" + str(id) + "/edit")
 
 # update page
 def edit_show(request, id):
