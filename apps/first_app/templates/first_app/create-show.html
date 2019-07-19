@@ -8,6 +8,13 @@
     <title>Create</title>
 </head>
 <body>
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
     <a class="go-back-button" href="/shows">Go Back</a>
     <main class="margin-auto col-md-4 order-md-2 mb-4">
         <form action="/shows/add" method="POST">
@@ -15,7 +22,7 @@
         <h4 class="mb-3">Add a New Show</h4>
         <div class="mb-3">
           <label for="address">Title</label>
-          <input name="show_add_title" type="text" class="form-control" placeholder='"The Office"' required="">
+          <input name="show_title" type="text" class="form-control" placeholder='"The Office"' required="">
           <div class="invalid-feedback">
               Valid Title is required.
           </div>
@@ -23,14 +30,14 @@
         <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">Network</label>
-                <input name="show_add_network" type="text" class="form-control" placeholder='"Comedy Central"' value="" required="">
+                <input name="show_network" type="text" class="form-control" placeholder='"Comedy Central"' value="" required="">
                 <div class="invalid-feedback">
                   Valid Network is required.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="releaseDate" id="release-date-label">Release Date</label>
-                <input name="show_add_date" type="date" class="form-control" name="releaseDate" id="release-date-form" placeholder="" value="" required="">
+                <input name="show_date" type="date" class="form-control" name="releaseDate" id="release-date-form" placeholder="" value="" required="">
                 <div class="invalid-feedback">
                   Valid Release Date is required.
                 </div>
@@ -38,7 +45,7 @@
         </div>
         <div class="mb-3">
             <label for="address">Description</label>
-            <textarea name="show_add_description" class="height150px scroll-view form-control" id="description" placeholder='"Haha, it is so funny!"' required=""></textarea>
+            <textarea name="show_description" class="height150px scroll-view form-control" id="description" placeholder='"Haha, it is so funny!"' required=""></textarea>
             <div class="invalid-feedback">
                 Valid Description is required.
             </div>
